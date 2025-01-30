@@ -1,3 +1,6 @@
+#ifndef BAR_H
+#define BAR_H
+
 #include <string>
 #include <iostream>
 using std::cout;
@@ -10,4 +13,6 @@ public:
 private:
     std::string str;
 };
+
+#endif
 
