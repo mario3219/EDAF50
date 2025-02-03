@@ -21,9 +21,19 @@ LDFLAGS =   -g
 #LDFLAGS +=  -stdlib=libc++
 
 # Targets
-PROGS =  read-words example-out
+PROGS =  read-words example-out run
+
+run: read-words example-out
+	./read-words
+	./example-out
 
 all: $(PROGS)
+
+read-words: read-words.o
+	$(CC) -o read-words read-words.cc
+
+example-out: example-out.o
+	$(CC) -o example-out example-out.cc
 
 # Phony targets
 .PHONY: all test clean distclean
