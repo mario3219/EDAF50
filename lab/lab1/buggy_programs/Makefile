@@ -21,16 +21,22 @@ PROGS=ub leak bounds bounds-heap dangling sum
 ALL: $(PROGS)
 
 leak: leak.o
+	$(CC) -o leak leak.cc
 
 dangling: dangling.o
+	$(CC) -o dangling dangling.cc
 
 bounds: bounds.o
+	$(CC) -o bounds bounds.cc
 
 bounds-heap: bounds-heap.o
+	$(CC) -o bounds-heap bounds-heap.cc
 
 ub: ub.o
+	$(CC) -o ub ub.cc
 
 sum: sum.o
+	$(CC) -o sum sum.cc
 
 # Targets
 # Phony targets
@@ -39,4 +45,5 @@ sum: sum.o
 # Standard clean
 clean:
 	-rm  $(PROGS)
+	-rm  $(PROGS:=.o)
 	-rm -r $(addsuffix .dSYM, $(PROGS))
