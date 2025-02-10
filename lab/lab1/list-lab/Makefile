@@ -22,10 +22,7 @@ PROGS = ltest run
 all: $(PROGS)
 
 # Targets rely on implicit rules for compiling and linking
-ltest: list.cc
-	$(CC) -c list.cc
-	$(CC) -c ltest.cc
-	$(CC) -o ltest ltest.o list.o
+ltest: ltest.o list.o
 
 run:
 	./ltest
