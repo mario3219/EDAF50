@@ -18,7 +18,7 @@ CXXFLAGS += $(DEPFLAGS)
 LDFLAGS = -g
 
 # Targets
-PROGS = build test
+PROGS = build words compile
 all: $(PROGS)
 
 # Targets rely on implicit rules for compiling and linking
@@ -27,8 +27,11 @@ all: $(PROGS)
 
 build: build.o
 
-test:
+words:
 	./build < /usr/share/dict/words > words.txt
+
+compile: dictionary.o spell.o
+	$(CC) -o spell dictionary.o spell.o
 
 # Phony targets
 .PHONY: all clean distclean
