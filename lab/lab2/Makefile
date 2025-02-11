@@ -18,20 +18,27 @@ CXXFLAGS += $(DEPFLAGS)
 LDFLAGS = -g
 
 # Targets
-PROGS = build words compile
+PROGS = build words test_dictionary
 all: $(PROGS)
 
 # Targets rely on implicit rules for compiling and linking
 #build:
 # /usr/share/dict
 
-build: build.o
+build: build.o trigrams.o
+	$(CC) -o build build.o trigrams.o
 
 words:
 	./build < /usr/share/dict/words > words.txt
 
-compile: dictionary.o spell.o
-	$(CC) -o spell dictionary.o spell.o
+test_dictionary: test_dictionary.o dictionary.o
+	$(CC) -o test_dictionary test_dictionary.o dictionary.o
+
+debug_dictionary:
+	g++ -g -c dictionary.cc
+	g++ -g -c test_dictionary.cc
+	g++ -g -o debug_dictionary dictionary.o test_dictionary.o
+	gdb debug_dictionary
 
 # Phony targets
 .PHONY: all clean distclean

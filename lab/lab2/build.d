@@ -1,1 +1,2 @@
-build.o: build.cc
+build.o: build.cc trigrams.h
+trigrams.h:

@@ -10,16 +10,21 @@
 using namespace std;
 
 Dictionary::Dictionary() {
-	unordered_set<string> dict;
 	ifstream file("words.txt");
 	string str;
-	while (getline(file, str)) {
-		dict.insert(str);		
-	}
+	if (file.is_open()) {
+		while (getline(file, str)) {
+			dict.insert(str);
+		}
+	} file.close();
 }
 
 bool Dictionary::contains(const string& word) const {
-	return true;
+	for (string str : dict) {
+		if (str.contains(word)) {
+			return true;
+		} return false;
+	}
 }
 
 vector<string> Dictionary::get_suggestions(const string& word) const {
