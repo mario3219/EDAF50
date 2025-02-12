@@ -2,8 +2,9 @@
 using std::cout;
 
 int main() {
-    char *p;
-    p = new char('Z');
-    cout << *p;
-    // dwdwdwd
+    int sum = 0;
+    for (int inc = -1; inc <= 1; ++inc) {
+        cout << inc << "\n";
+    }
+    return 0;
 }

@@ -1,11 +1,15 @@
 # include "dictionary.h"
 # include <iostream>
 # include "word.h"
+# include "trigrams.h"
 
 int main() {
 	Dictionary dict;
 	std::string str = "dwadawd";
 	std::cout << dict.contains(str) << "\n";
-	dict.add_trigram_suggestions("test");
+	std::vector<std::string> candidates = dict.add_trigram_suggestions("aachen");
+	for (std::string str : candidates) {
+		std::cout << str << "\n";
+	}
 	return 0;
 }

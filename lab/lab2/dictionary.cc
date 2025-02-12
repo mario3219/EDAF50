@@ -55,11 +55,22 @@ vector<string> Dictionary::get_suggestions(const string& word) const {
 
 vector<string> Dictionary::add_trigram_suggestions(const string& word) {
 	int sz = word.size();
-	vector<string> trigr = find_trigrams(word);
-	for (Word str : words[sz]) {
-		cout << str.get_word() << "\n";
+	vector<Word> can; //candidates
+
+	// add candidates from words list around equal size (+-1)
+	for (int inc = -1; inc <= 1; ++inc) {
+		can.insert(can.end(), words[sz+inc].begin(), words[sz+inc].end());
 	}
 
-	vector<string> temp = {"temp"};
-	return temp;
+	// remove candidates with less than half matching trigrams
+	vector<string> triag = find_trigrams(word);
+	vector<string> new_can;
+	size_t count = 0;
+	for (size_t idx = 0; idx <= can.size(); ++idx) {
+		count = can[idx].get_matches(triag);
+		if (count >= triag.size()/2) {
+			new_can.insert(new_can.begin(), can[idx].get_word());
+		}
+	}
+	return new_can;
 }

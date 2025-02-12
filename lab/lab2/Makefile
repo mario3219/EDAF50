@@ -32,8 +32,8 @@ words:
 	./build < /usr/share/dict/words > words.txt
 	rm build
 
-test_dictionary: test_dictionary.o dictionary.o word.o
-	$(CC) -o test_dictionary test_dictionary.o dictionary.o word.o
+test_dictionary: test_dictionary.o dictionary.o word.o trigrams.o
+	$(CC) -o test_dictionary test_dictionary.o dictionary.o word.o trigrams.o
 
 debug_dictionary:
 	$(CC) -g -c dictionary.cc
