@@ -23,8 +23,8 @@ bool Dictionary::contains(const string& word) const {
 	for (string str : dict) {
 		if (str.contains(word)) {
 			return true;
-		} return false;
-	}
+		}
+	} return false;
 }
 
 vector<string> Dictionary::get_suggestions(const string& word) const {

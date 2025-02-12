@@ -4,7 +4,7 @@
 
 int main() {
 	Dictionary dict;
-	std::string str = "ama";
+	std::string str = "dwadawd";
 	std::cout << dict.contains(str) << "\n";
 	return 0;
 }
