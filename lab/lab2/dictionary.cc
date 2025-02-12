@@ -62,7 +62,7 @@ vector<string> Dictionary::add_trigram_suggestions(const string& word) {
 		can.insert(can.end(), words[sz+inc].begin(), words[sz+inc].end());
 	}
 
-	// remove candidates with less than half matching trigrams
+	// store candidates with more than half or more matching trigrams
 	vector<string> triag = find_trigrams(word);
 	vector<string> new_can;
 	size_t count = 0;

@@ -45,7 +45,8 @@ sanitize_dictionary:
 	$(CC) $(CPPFLAGS) -c word.cc
 	$(CC) $(CPPFLAGS) -c dictionary.cc
 	$(CC) $(CPPFLAGS) -c test_dictionary.cc
-	$(CC) $(CPPFLAGS) -g -fsanitize=leak -o sanitize_dictionary dictionary.o test_dictionary.o word.o
+	$(CC) $(CPPFLAGS) -c trigrams.cc
+	$(CC) $(CPPFLAGS) -g -O1 -fsanitize=leak -o sanitize_dictionary dictionary.o test_dictionary.o word.o trigrams.o
 
 # Phony targets
 .PHONY: all clean distclean
