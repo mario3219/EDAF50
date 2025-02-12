@@ -4,14 +4,19 @@
 #include <string>
 #include <vector>
 #include <unordered_set>
+#include "word.h"
 
 class Dictionary {
 public:
 	Dictionary();
 	bool contains(const std::string& word) const;
 	std::vector<std::string> get_suggestions(const std::string& word) const;
+	//std::vector<std::string> add_trigram_suggestions(const std::string& trigrams);
 private:
 	std::unordered_set<std::string> dict;
+	static constexpr int maxlen{25};
+	std::vector<Word> words;
+	std::vector<std::string> split_lines(const std::string& str) const;
 };
 
 #endif
