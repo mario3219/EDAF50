@@ -30,15 +30,22 @@ build: build.o trigrams.o
 
 words:
 	./build < /usr/share/dict/words > words.txt
+	rm build
 
-test_dictionary: test_dictionary.o dictionary.o
-	$(CC) -o test_dictionary test_dictionary.o dictionary.o
+test_dictionary: test_dictionary.o dictionary.o word.o
+	$(CC) -o test_dictionary test_dictionary.o dictionary.o word.o
 
 debug_dictionary:
-	g++ -g -c dictionary.cc
-	g++ -g -c test_dictionary.cc
-	g++ -g -o debug_dictionary dictionary.o test_dictionary.o
+	$(CC) -g -c dictionary.cc
+	$(CC) -g -c test_dictionary.cc
+	$(CC) -g -o debug_dictionary dictionary.o test_dictionary.o
 	gdb debug_dictionary
+
+sanitize_dictionary:
+	$(CC) $(CPPFLAGS) -c word.cc
+	$(CC) $(CPPFLAGS) -c dictionary.cc
+	$(CC) $(CPPFLAGS) -c test_dictionary.cc
+	$(CC) $(CPPFLAGS) -g -fsanitize=leak -o sanitize_dictionary dictionary.o test_dictionary.o word.o
 
 # Phony targets
 .PHONY: all clean distclean

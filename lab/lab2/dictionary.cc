@@ -7,6 +7,7 @@
 #include "dictionary.h"
 #include <unordered_set>
 #include <sstream>
+#include "trigrams.h"
 
 using namespace std;
 
@@ -24,16 +25,17 @@ Dictionary::Dictionary() {
 	string str;
 	vector<string> v;	// for using word class
 	string word;		// ...
-	string trigrams;	// ...
 	if (file.is_open()) {
 		while (getline(file, str)) {
 			dict.insert(str);
-			
-			// using word class instead
+
+			// using word class
 			v = split_lines(str);
 			word = v[0];
 			v.erase(v.begin(), v.begin() + 2);	// keep only trigrams
-			words.insert(words.begin(), Word(word, v));
+
+			// stores word in the vector at index equal to the size of the word
+			words[word.size()].insert(words[word.size()].begin(), Word(word, v));
 		}
 	} file.close();
 }
@@ -51,6 +53,13 @@ vector<string> Dictionary::get_suggestions(const string& word) const {
 	return suggestions;
 }
 
-//vector<string> Dictionary::add_trigram_suggestions(const string& trigrams) {
-//	return vector<string>;
-//}
+vector<string> Dictionary::add_trigram_suggestions(const string& word) {
+	int sz = word.size();
+	vector<string> trigr = find_trigrams(word);
+	for (Word str : words[sz]) {
+		cout << str.get_word() << "\n";
+	}
+
+	vector<string> temp = {"temp"};
+	return temp;
+}
