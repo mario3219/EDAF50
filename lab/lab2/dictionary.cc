@@ -84,7 +84,7 @@ vector<string> Dictionary::add_trigram_suggestions(const string& word) const {
 	vector<string> triag = find_trigrams(word);
 	vector<string> new_can;
 	size_t count = 0;
-	for (size_t idx = 0; idx <= can.size(); ++idx) {
+	for (size_t idx = 0; idx < can.size(); ++idx) {
 		count = can[idx].get_matches(triag);	//bug
 		if (count >= triag.size()/2) {
 			new_can.insert(new_can.begin(), can[idx].get_word());
