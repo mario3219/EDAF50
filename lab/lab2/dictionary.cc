@@ -51,7 +51,8 @@ bool Dictionary::contains(const string& word) const {
 }
 
 vector<string> Dictionary::get_suggestions(const string& word) const {
-	vector<string> suggestions;
+	vector<string> suggestions = add_trigram_suggestions(word);
+	suggestions = trim_suggestions(word, suggestions);
 	return suggestions;
 }
 
@@ -62,13 +63,15 @@ vector<string> Dictionary::trim_suggestions(const string& word, const vector<str
 		score = edit_distance(word, candidate);
 		map[score] = candidate;
 	}
-	for (auto s : map) {
-		cout << s.first << "\n";
-	}
-	return candidates;
+	int count = 0;
+	vector<string> new_candidates;
+	for (auto x = map.begin(); x != map.end() && count < 5; ++x, ++count) {
+		new_candidates.push_back(x->second);
+    }
+	return new_candidates;
 }
 
-vector<string> Dictionary::add_trigram_suggestions(const string& word) {
+vector<string> Dictionary::add_trigram_suggestions(const string& word) const {
 	int sz = word.size();
 	vector<Word> can; //candidates
 
@@ -82,7 +85,7 @@ vector<string> Dictionary::add_trigram_suggestions(const string& word) {
 	vector<string> new_can;
 	size_t count = 0;
 	for (size_t idx = 0; idx <= can.size(); ++idx) {
-		count = can[idx].get_matches(triag);
+		count = can[idx].get_matches(triag);	//bug
 		if (count >= triag.size()/2) {
 			new_can.insert(new_can.begin(), can[idx].get_word());
 		}

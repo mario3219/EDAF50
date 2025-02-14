@@ -12,7 +12,7 @@ public:
 	bool contains(const std::string& word) const;
 	std::vector<std::string> get_suggestions(const std::string& word) const;
 	std::vector<std::string> trim_suggestions(const std::string& word, const std::vector<std::string> candidates) const;
-	std::vector<std::string> add_trigram_suggestions(const std::string& word);
+	std::vector<std::string> add_trigram_suggestions(const std::string& word) const;
 private:
 	std::unordered_set<std::string> dict;	//decprecated since A4
 	static constexpr int maxlen{25};	// creates constant maxlen = 25

@@ -32,7 +32,16 @@ words:
 	./build < /usr/share/dict/words > words.txt
 	rm build
 
-test_dictionary: test_dictionary.o dictionary.o word.o trigrams.o edit_distance.o
+spell: dictionary.o word.o trigrams.o spell.o
+	$(CC) -std=c++23 -c edit_distance.cc
+	$(CC) -std=c++23 -o spell dictionary.o word.o trigrams.o spell.o edit_distance.o
+
+debug_spell: dictionary.o word.o trigrams.o spell.o
+	$(CC) -std=c++23 -c edit_distance.cc
+	$(CC) -std=c++23 -g -o debug_spell dictionary.o word.o trigrams.o spell.o edit_distance.o
+
+test_dictionary: test_dictionary.o dictionary.o word.o trigrams.o
+	$(CC) -std=c++23 -c edit_distance.cc
 	$(CC) -std=c++23 -o test_dictionary test_dictionary.o dictionary.o word.o trigrams.o edit_distance.o
 
 test_edit_distance: test_edit_distance.o
@@ -59,7 +68,7 @@ sanitize_dictionary:
 clean:
 	rm -f *.o $(PROGS)
 	rm test_edit_distance
-	rm -f words.txt
+	rm words.txt
 
 distclean: clean
 	rm *.d
