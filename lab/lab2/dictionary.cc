@@ -8,6 +8,8 @@
 #include <unordered_set>
 #include <sstream>
 #include "trigrams.h"
+#include <map>
+#include "edit_distance.h"
 
 using namespace std;
 
@@ -53,10 +55,17 @@ vector<string> Dictionary::get_suggestions(const string& word) const {
 	return suggestions;
 }
 
-vector<string> Dictionary::trim_suggestions(const vector<string> candidates) const {
-	string score[];
-	for (string candidate : candidates)
-	return suggestions;
+vector<string> Dictionary::trim_suggestions(const string& word, const vector<string> candidates) const {
+	map<int,string> map;
+	int score;
+	for (string candidate : candidates) {
+		score = edit_distance(word, candidate);
+		map[score] = candidate;
+	}
+	for (auto s : map) {
+		cout << s.first << "\n";
+	}
+	return candidates;
 }
 
 vector<string> Dictionary::add_trigram_suggestions(const string& word) {

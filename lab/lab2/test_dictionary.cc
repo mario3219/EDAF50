@@ -11,5 +11,6 @@ int main() {
 	for (std::string str : candidates) {
 		std::cout << str << "\n";
 	}
+	dict.trim_suggestions("aachen",candidates);
 	return 0;
 }
