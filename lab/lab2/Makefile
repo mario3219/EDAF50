@@ -35,6 +35,10 @@ words:
 test_dictionary: test_dictionary.o dictionary.o word.o trigrams.o
 	$(CC) -o test_dictionary test_dictionary.o dictionary.o word.o trigrams.o
 
+test_edit_distance: test_edit_distance.o
+	$(CC) -g -c edit_distance.cc
+	$(CC) -o test_edit_distance test_edit_distance.o edit_distance.o
+
 debug_dictionary:
 	$(CC) -g -c dictionary.cc
 	$(CC) -g -c test_dictionary.cc
@@ -54,6 +58,7 @@ sanitize_dictionary:
 # Standard clean
 clean:
 	rm -f *.o $(PROGS)
+	rm test_edit_distance
 	rm -f words.txt
 
 distclean: clean

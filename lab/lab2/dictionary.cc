@@ -53,6 +53,12 @@ vector<string> Dictionary::get_suggestions(const string& word) const {
 	return suggestions;
 }
 
+vector<string> Dictionary::trim_suggestions(const vector<string> candidates) const {
+	string score[];
+	for (string candidate : candidates)
+	return suggestions;
+}
+
 vector<string> Dictionary::add_trigram_suggestions(const string& word) {
 	int sz = word.size();
 	vector<Word> can; //candidates
