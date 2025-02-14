@@ -3,8 +3,7 @@
 #include "word.h"
 #include <algorithm>
 
-using std::vector;
-using std::string;
+using namespace std;
 
 Word::Word(const string& w, const vector<string>& t) : word(w), trigrams(t) {}
 

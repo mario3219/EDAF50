@@ -29,7 +29,7 @@ Dictionary::Dictionary() {
 	string word;		// ...
 	if (file.is_open()) {
 		while (getline(file, str)) {
-			dict.insert(str);
+			//dict.insert(str);	deprecated, using word class instead
 
 			// using word class
 			v = split_lines(str);
@@ -43,11 +43,18 @@ Dictionary::Dictionary() {
 }
 
 bool Dictionary::contains(const string& word) const {
-	for (string str : dict) {
-		if (str.contains(word)) {
+	for (Word n : words[word.size()]) {
+		if (n.get_word() == word) {
 			return true;
 		}
 	} return false;
+
+	// deprecated, using word class instead
+	/* for (string str : dict) {
+		if (str.contains(word)) {
+			return true;
+		}
+	} return false; */
 }
 
 vector<string> Dictionary::get_suggestions(const string& word) const {
@@ -58,10 +65,8 @@ vector<string> Dictionary::get_suggestions(const string& word) const {
 
 vector<string> Dictionary::trim_suggestions(const string& word, const vector<string> candidates) const {
 	map<int,string> map;
-	int score;
 	for (string candidate : candidates) {
-		score = edit_distance(word, candidate);
-		map[score] = candidate;
+		map[edit_distance(word, candidate)] = candidate;
 	}
 	int count = 0;
 	vector<string> new_candidates;
@@ -85,7 +90,7 @@ vector<string> Dictionary::add_trigram_suggestions(const string& word) const {
 	vector<string> new_can;
 	size_t count = 0;
 	for (size_t idx = 0; idx < can.size(); ++idx) {
-		count = can[idx].get_matches(triag);	//bug
+		count = can[idx].get_matches(triag);
 		if (count >= triag.size()/2) {
 			new_can.insert(new_can.begin(), can[idx].get_word());
 		}

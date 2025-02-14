@@ -4,6 +4,8 @@
 # include <iostream>
 # include <vector>
 
-std::vector<std::string> find_trigrams(const std::string &s);
+using namespace std;
+
+vector<string> find_trigrams(const string &s);
 
 #endif

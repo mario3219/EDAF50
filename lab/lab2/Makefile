@@ -67,7 +67,6 @@ sanitize_dictionary:
 # Standard clean
 clean:
 	rm -f *.o $(PROGS)
-	rm test_edit_distance
 	rm words.txt
 
 distclean: clean
