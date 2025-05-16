@@ -1,1 +1,0 @@
-add_library(lib list.cc coding.cc)
