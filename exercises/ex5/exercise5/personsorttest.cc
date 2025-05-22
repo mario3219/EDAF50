@@ -12,6 +12,13 @@ using namespace std;
  * Collect some persons in a phone book (a vector), sort
  * the phone book, print it.
  */
+
+bool myfunction(const Person& a, const Person& b) {
+	string name1 = a.get_name();
+	string name2 = b.get_name();
+	return name1 > name2;
+}
+
 int main() {
 	vector<Person> phonebook;
 	phonebook.push_back(Person("Petra", "046-12 13 14"));
@@ -25,7 +32,7 @@ int main() {
 		 ostream_iterator<Person>(cout, "\n"));
 	cout << endl;
 	
-	sort(phonebook.begin(), phonebook.end());
+	sort(phonebook.begin(), phonebook.end(), myfunction);
 	
 	cout << "Sorted:" << endl;
 	copy(phonebook.begin(), phonebook.end(), 
